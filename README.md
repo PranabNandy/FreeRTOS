@@ -9,7 +9,7 @@
 - FreeRTOS kernel features:
   + Pre-emptive or co-operative operation
   + Very flexible task priority assignment
-  + Software timers
+  + **Software timers**
   + Queues
   + Binary semaphores
   + Counting semaphores
