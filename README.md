@@ -41,9 +41,9 @@
 FreeRTOS
   ├── Demo             (Contains demo application for every official FreeRTOS port)
   ├── Test             (contains the tests performed on common code and the portable layer code)
-  └── Source           (Core FreeRTOS kernel file)
+  └── Source           //------  (Core FreeRTOS kernel file)   ------//
       ├── include      (Consists of The core FreeRTOS kernel header files)
-      └── portable     (Consists of Processor specific code)
+      └── portable     {==== (Consists of Processor specific code)  ====}
           ├── Compiler (Contains all the ports created by compiler)
           ├── MemMang  (Contains The sample heap implementations)
           └── ...
