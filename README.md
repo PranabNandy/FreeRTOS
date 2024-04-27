@@ -85,4 +85,10 @@ FreeRTOS.h
 | STM32F4 standard peripherals library | Button |
 | minicom |
 
- 
+
+## STM32 Boards
+- 32F429   { LCD based}
+- 32F407G  { standard one}
+- NUCLEO F446RE    {Nucleo board }
+ ![Screenshot from 2024-04-27 15-18-36](https://github.com/PranabNandy/FreeRTOS/assets/34576104/3ac68ef5-8478-4c81-8d37-a506bc8805a3)
+
