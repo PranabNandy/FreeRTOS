@@ -22,3 +22,8 @@
 -
 ![Screenshot from 2024-04-28 23-18-40](https://github.com/PranabNandy/FreeRTOS/assets/34576104/d09e5fed-583d-4948-b8a5-6f57e5bb11ee)
 
+- **Now add the FreeRTOSConfig.h header file and add it also in the include path**
+- These are the error we will face and we have to resolve it in this way
+![Screenshot from 2024-04-28 23-59-45](https://github.com/PranabNandy/FreeRTOS/assets/34576104/89792bd5-5513-48ba-8dc3-49c89b80918b)
+![Screenshot from 2024-04-29 00-05-14](https://github.com/PranabNandy/FreeRTOS/assets/34576104/dbcdb000-5611-41d3-9331-b76731bcef6f)
+
