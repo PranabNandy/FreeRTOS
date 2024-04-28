@@ -11,3 +11,9 @@
 
 ![Screenshot from 2024-04-28 11-14-07](https://github.com/PranabNandy/FreeRTOS/assets/34576104/7cf0da76-1fae-4757-b893-361d29d73a02)
 ![Screenshot from 2024-04-28 11-12-31](https://github.com/PranabNandy/FreeRTOS/assets/34576104/06f6409d-17fd-42c0-a0e0-6cc143cef749)
+
+
+## Snapshot of STM32Cube
+![Screenshot from 2024-04-28 23-03-56](https://github.com/PranabNandy/FreeRTOS/assets/34576104/0464c188-a3fa-41f0-915f-e242a3ad5ccd)
+- **How to include a file/ Library**
+![Screenshot from 2024-04-28 22-37-10](https://github.com/PranabNandy/FreeRTOS/assets/34576104/a11a3fb0-3d55-4dcf-aad6-a471136373a5)
