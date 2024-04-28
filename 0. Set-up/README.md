@@ -11,6 +11,7 @@
 
 ![Screenshot from 2024-04-28 11-14-07](https://github.com/PranabNandy/FreeRTOS/assets/34576104/7cf0da76-1fae-4757-b893-361d29d73a02)
 ![Screenshot from 2024-04-28 11-12-31](https://github.com/PranabNandy/FreeRTOS/assets/34576104/06f6409d-17fd-42c0-a0e0-6cc143cef749)
+![Screenshot from 2024-04-29 00-22-05](https://github.com/PranabNandy/FreeRTOS/assets/34576104/1992186a-0b44-464c-8413-bb0f025ac48e)
 
 
 ## Snapshot of STM32Cube
@@ -23,6 +24,7 @@
 ![Screenshot from 2024-04-28 23-18-40](https://github.com/PranabNandy/FreeRTOS/assets/34576104/d09e5fed-583d-4948-b8a5-6f57e5bb11ee)
 
 - **Now add the FreeRTOSConfig.h header file and add it also in the include path**
+- We can take this file **FreeRTOSv202212.01/FreeRTOS/Demo/CORTEX_M4F_STM32F407ZG-SK** from here
 - These are the error we will face and we have to resolve it in this way
 ![Screenshot from 2024-04-28 23-59-45](https://github.com/PranabNandy/FreeRTOS/assets/34576104/89792bd5-5513-48ba-8dc3-49c89b80918b)
 ![Screenshot from 2024-04-29 00-05-14](https://github.com/PranabNandy/FreeRTOS/assets/34576104/dbcdb000-5611-41d3-9331-b76731bcef6f)
