@@ -29,3 +29,13 @@
 ![Screenshot from 2024-04-28 23-59-45](https://github.com/PranabNandy/FreeRTOS/assets/34576104/89792bd5-5513-48ba-8dc3-49c89b80918b)
 ![Screenshot from 2024-04-29 00-05-14](https://github.com/PranabNandy/FreeRTOS/assets/34576104/dbcdb000-5611-41d3-9331-b76731bcef6f)
 
+- **Time based source conflicts between RTOS and HAL code base**
+- These are the changes we have to do
+- because of that a new file will be created
+
+ ![Screenshot from 2024-04-29 23-52-55](https://github.com/PranabNandy/FreeRTOS/assets/34576104/6949c8bc-dc67-468f-a4f8-815f232de747)
+![Screenshot from 2024-04-29 23-59-51](https://github.com/PranabNandy/FreeRTOS/assets/34576104/b60147d9-0137-4050-a98d-feb51ce4b65b)
+![Screenshot from 2024-04-30 00-00-06](https://github.com/PranabNandy/FreeRTOS/assets/34576104/259be2e6-89f9-4e08-bbcc-4b99d7597b03)
+
+ ![Screenshot from 2024-04-30 00-00-28](https://github.com/PranabNandy/FreeRTOS/assets/34576104/34c6ac5c-ea12-4cb8-ac33-79e0e7f78724)
+
