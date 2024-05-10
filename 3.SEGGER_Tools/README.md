@@ -20,13 +20,13 @@
 
 ## 2. SystemView visualization modes
 ### 1. Real time recording (Continuous recording)
-- With a SEGGER J-Link and its Real Time Transfer (RTT) technology SystemView can continuously record data, and analyze and visualize it in real time
-- Real time mode can be achieved via ST-link instead of J-link . For that J-link firmware has to be flashed on ST-link circuitry of STM32 boards
+- With a SEGGER `J-Link` and its `Real Time Transfer (RTT) technology` SystemView can continuously record data, and analyze and visualize it in real time
+- Real time mode can be achieved `via ST-link` instead of J-link . For that J-link firmware has to be flashed on ST-link circuitry of STM32 boards
 
 ![Screenshot from 2021-02-04 22-13-44](https://user-images.githubusercontent.com/32474027/106897460-4f399200-6736-11eb-9b80-a66ed2e52ed3.png)
 
 ### 2. Single-shot recording
-- You need not to have JLINK or STLINK debugger for this
+- You `need not to have JLINK or STLINK debugger` for this
 - In single-shot mode the recording is started manually in the application, which allows recording only specific parts, which are of interest
 
 ![Screenshot from 2021-02-04 22-14-39](https://user-images.githubusercontent.com/32474027/106897538-65dfe900-6736-11eb-9abe-c7780b6463cb.png)
@@ -37,10 +37,18 @@
 ```
 https://www.segger.com/downloads/systemview/
 ````
-- Download targets sources:
+- Download target source Files:
 ```
 https://www.segger.com/downloads/systemview/SystemView_Src_V320.zip.sig
 ```
+- Download the User Manual also : For the references
+```C++
+ if("Not_Downloaded"){
+         char UserManual;
+         cout<<"Download it"<<endl;
+ }
+```
+
 ### Step 2: Including SEGGER SystemView in the application
 - Copy below to `/Config`
 ```
