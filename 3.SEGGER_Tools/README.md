@@ -49,6 +49,21 @@ https://www.segger.com/downloads/systemview/SystemView_Src_V320.zip.sig
  }
 ```
 
+## Some ScreenShot of System View Software
+### Timeline
+![Screenshot from 2024-05-10 11-43-13](https://github.com/PranabNandy/FreeRTOS/assets/34576104/86069f92-e059-4e4b-9490-9b3ae56781f5)
+
+### CPU load
+![Screenshot from 2024-05-10 14-48-49](https://github.com/PranabNandy/FreeRTOS/assets/34576104/8d65e01a-0cc0-4458-a36e-241434e8eb01)
+
+### Contexts
+![Screenshot from 2024-05-10 14-53-21](https://github.com/PranabNandy/FreeRTOS/assets/34576104/a30be37c-72fa-4b88-9a90-109c0ab62f65)
+
+### Terminal
+![Screenshot from 2024-05-10 14-53-42](https://github.com/PranabNandy/FreeRTOS/assets/34576104/5c8a3cd4-37e2-4da2-85b6-07fe6f911ac4)
+
+
+
 ### Step 2: Including SEGGER SystemView in the application
 - Copy below to `/Config`
 ```
