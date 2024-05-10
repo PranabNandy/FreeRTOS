@@ -25,7 +25,7 @@
 
 ![Screenshot from 2021-02-04 22-13-44](https://user-images.githubusercontent.com/32474027/106897460-4f399200-6736-11eb-9b80-a66ed2e52ed3.png)
 
-### 2. Single-shot recording
+### 2. Single-shot recording  { Mostly we will be using this one }
 - You `need not to have JLINK or STLINK debugger` for this
 - In single-shot mode the recording is started manually in the application, which allows recording only specific parts, which are of interest
 
