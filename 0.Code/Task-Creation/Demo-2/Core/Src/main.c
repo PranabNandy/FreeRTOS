@@ -44,7 +44,11 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-#define DWT_CTRL    (*(volatile uint32_t*)0xE0001000)
+
+//  Cycle count registers
+
+#define DWT_CTRL    (*(volatile uint32_t*) 0xE0001000)
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -93,9 +97,14 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  //Enable the CYCCNT counter.
-  DWT_CTRL |= ( 1 << 0);
 
+  // Enable the CYCCNT counter.
+  
+  DWT_CTRL |=  ( 1 << 0);
+
+  SEGGER_SYSVIEW_Conf();
+
+  SEGGER_SYSVIEW_Start();
 
   status = xTaskCreate(task1_handler, "Task-1", 200, "Hello world from Task-1", 2, &task1_handle);
 
