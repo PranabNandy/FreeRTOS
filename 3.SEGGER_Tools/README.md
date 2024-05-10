@@ -66,33 +66,39 @@ https://www.segger.com/downloads/systemview/SystemView_Src_V320.zip.sig
 
 ### Step 2: Including SEGGER SystemView in the application
 - Copy below to `/Config`
-```
-/SystemView_Src_V320/Sample/FreeRTOSV10/Config/Cortex-M/SEGGER_SYSVIEW_Config_FreeRTOS.c
-/SystemView_Src_V320/Config/*
+```sh
+echo 'Just Follow this process' | echo 'Trust me'
+
+cp /SystemView_Src_V320/Sample/FreeRTOSV10/Config/Cortex-M/SEGGER_SYSVIEW_Config_FreeRTOS.c /SystemView_Src_V320/Config/*
 ```
 - Copy below to `/OS`
-```
+```cpp
 /SystemView_Src_V320/Sample/FreeRTOSV10/SEGGER_SYSVIEW_FreeRTOS.c
 /SystemView_Src_V320/Sample/FreeRTOSV10/SEGGER_SYSVIEW_FreeRTOS.h
 ```
 - Copy below to `/Patch/FreeRTOSv10`
-```
+```cpp
 /SystemView_Src_V320/Sample/FreeRTOSV10/Patch/FreeRTOSV10_Core.patch
 ```
 - Copy below to `/SEGGER`
-```
+```cpp
 /SystemView_Src_V320/SEGGER/SEGGER.h
 /SystemView_Src_V320/SEGGER/SEGGER_RTT.c
 /SystemView_Src_V320/SEGGER/SEGGER_RTT.h
 /SystemView_Src_V320/SEGGER/SEGGER_SYSVIEW.c
 /SystemView_Src_V320/SEGGER/SEGGER_SYSVIEW.h
-/SystemView_Src_V320/SEGGER/SEGGER_RTT_ASM_ARMv7M.S
+/SystemView_Src_V320/SEGGER/SEGGER_RTT_ASM_ARMv7M.S   ---> set this path for assembler
 /SystemView_Src_V320/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h
 /SystemView_Src_V320/SEGGER/SEGGER_SYSVIEW_Int.h		
 ```
 - Include header file (Don't forget)
+#### Compiler include path
+![Screenshot from 2024-05-10 17-31-43](https://github.com/PranabNandy/FreeRTOS/assets/34576104/679ecd68-8fb6-4578-9198-8ba4d7fbfe97)
 
-```
+#### Assembler include path
+![Screenshot from 2024-05-10 17-32-56](https://github.com/PranabNandy/FreeRTOS/assets/34576104/cd5fee03-ccef-4e12-b5de-e3ce12ad999a)
+
+```cpp
 Third_Party
 └── SEGGER
 	├── Config
@@ -107,14 +113,16 @@ Third_Party
 	│   └── FreeRTOSv10_1
 	│       └── FreeRTOSV10_Core.patch
 	└── SEGGER
-	├── SEGGER.h
-	├── SEGGER_RTT_ASM_ARMv7M.S
-	├── SEGGER_RTT.c
-	├── SEGGER_RTT.h
-	├── SEGGER_SYSVIEW.c
-	├── SEGGER_SYSVIEW_ConfDefaults.h
-	├── SEGGER_SYSVIEW.h
-	└── SEGGER_SYSVIEW_Int.h
+             ├── Syscalls
+                  └──  SEGGER_RTT_Syscalls_GCC.c
+	     ├── SEGGER.h
+	     └── SEGGER_RTT_ASM_ARMv7M.S
+             └── SEGGER_RTT.c
+	     └── SEGGER_RTT.h
+	     └── SEGGER_SYSVIEW.c
+	     └── SEGGER_SYSVIEW_ConfDefaults.h
+	     └── SEGGER_SYSVIEW.h
+	     └── SEGGER_SYSVIEW_Int.h
 ```
 
 ### Step 3: Patching FreeRTOS files
@@ -146,7 +154,9 @@ Third_Party
 ### Step 6: Enable the ARM Cortex Mx Cycle Counter (default disable)
 - This is required to maintain the time stamp information of application events. SystemView will use the Cycle counter register value to maintain the time stamp information of events.
 - `DWT_CYCCNT` register of ARM Cortex Mx processor stores number of clock cycles that have happened after the reset of the processor
-```
+![Screenshot from 2024-05-10 17-24-44](https://github.com/PranabNandy/FreeRTOS/assets/34576104/159cbd01-73d8-435a-9461-48f4a21bbbad)
+
+```cpp
 /* Enable cycles counter in DWT_CYCCNT regiter */
 DWT->CTRL |= (1 << 0);
 ```
