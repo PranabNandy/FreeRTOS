@@ -49,3 +49,12 @@
 ![Screenshot from 2024-05-11 10-44-25](https://github.com/PranabNandy/FreeRTOS/assets/34576104/1760234c-4b48-4a3e-8def-9202967d9b17)
 ![Screenshot from 2024-05-11 10-42-21](https://github.com/PranabNandy/FreeRTOS/assets/34576104/907eeeaa-0b12-4f33-883c-53fc853c380e)
 
+### vTaskStartScheduler()
+- This is implemented in tasks.c of FreeRTOS kernel and used to start the RTOS scheduler.
+- Remember that after calling this function only the scheduler code is initialized and all the Arch. Specific interrupts will be activated.
+- This function also creates the idle and Timer daemon task
+- This function calls xPortStartScheduler() to do the Arch. Specific Initializations
+![Screenshot from 2024-05-11 11-31-12](https://github.com/PranabNandy/FreeRTOS/assets/34576104/121233c6-8ca9-4deb-ba58-73630d65f3e6)
+
+![Screenshot from 2024-05-11 11-36-32](https://github.com/PranabNandy/FreeRTOS/assets/34576104/5a2e6960-25af-49b1-a674-269a314d055f)
+
