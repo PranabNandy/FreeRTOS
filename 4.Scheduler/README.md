@@ -41,3 +41,11 @@
 - All software timer callback functions execute in the context of the timer daemon task
 
   
+### vPortSVCHandler()
+- It only used once in the entire program execution
+- **PendSV Handler** working as an Scheduler
+- **Sys Tick Handler** working as SysTick Timer 
+![Screenshot from 2024-05-11 10-44-13](https://github.com/PranabNandy/FreeRTOS/assets/34576104/63dbd2d7-150a-4d5a-ada6-6ece3b2ff8ad)
+![Screenshot from 2024-05-11 10-44-25](https://github.com/PranabNandy/FreeRTOS/assets/34576104/1760234c-4b48-4a3e-8def-9202967d9b17)
+![Screenshot from 2024-05-11 10-42-21](https://github.com/PranabNandy/FreeRTOS/assets/34576104/907eeeaa-0b12-4f33-883c-53fc853c380e)
+
