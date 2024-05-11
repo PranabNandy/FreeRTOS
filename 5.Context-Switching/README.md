@@ -2,6 +2,8 @@
 - No
 - SysTick timer is used for Kernel ticking, it can not be used for other purposes
 - But other timer peripheral can be used for kernel tick timer
+  
+![Screenshot from 2024-05-11 21-54-27](https://github.com/PranabNandy/FreeRTOS/assets/34576104/0d265979-463e-4ded-af33-d7f4e2d96542)
 
 #### In FreeRTOS, who triggers the context switching ?
 - SysTick exception handler
