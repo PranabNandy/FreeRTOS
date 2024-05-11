@@ -6,7 +6,15 @@
 #### In FreeRTOS, who triggers the context switching ?
 - SysTick exception handler
 - Not the PendSV exception handler
-- PendSV handler is responsible for conducting the context switching but it not responsible for triggering that 
+- PendSV handler is responsible for conducting the context switching but it not responsible for triggering that
+
+##### SysTick is timer engine which is inside the ARM Cortex M processor.
+#### What are the registers moved to stack during context switching in ARM cortex M processor ?
+
+- Assume : no floating point unit enabled.
+
+- R0---R3,   R12,   LR, PC, PSP
+
 # Context Switching
 - On FreeRTOS you can also trigger context switch manually using **taskYIELD()** macro
 - Kernel mode comes when we execute the SysTick Timer (and its Interrupt Handler), PendSV Code (i.e when Scheduler run ) etc.
