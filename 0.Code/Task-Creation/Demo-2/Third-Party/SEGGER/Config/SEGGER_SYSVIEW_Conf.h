@@ -78,6 +78,9 @@ Additional information:
 * TODO: Add your defines here.                                       *
 **********************************************************************
 */
+
+// #define SEGGER_UART_REC 0
+ // this is needed for seggar_uart communication
 #define SEGGER_UART_REC 1
 
 #if (SEGGER_UART_REC == 1)

@@ -102,9 +102,14 @@ int main(void)
   
   DWT_CTRL |=  ( 1 << 0);
 
+  // this is needed for seggar_uart communication
+  // Also set HCLK to 168 Mhz
+  SEGGER_UART_init(500000);
+
   SEGGER_SYSVIEW_Conf();
 
-  SEGGER_SYSVIEW_Start();
+  // As this function is getting called in seggar_uart.c
+  //SEGGER_SYSVIEW_Start();
 
   status = xTaskCreate(task1_handler, "Task-1", 200, "Hello world from Task-1", 2, &task1_handle);
 
