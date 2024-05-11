@@ -1,3 +1,8 @@
+#### When using freeRTOS  on ARM Cortex Processor, can we use systick timer for some other use case in our application ?
+- No
+- SysTick timer is used for Kernel ticking, it can not be used for other purposes
+- But other timer peripheral can be used for kernel tick timer
+
 # Context Switching
 - On FreeRTOS you can also trigger context switch manually using **taskYIELD()** macro
 - Kernel mode comes when we execute the SysTick Timer (and its Interrupt Handler), PendSV Code (i.e when Scheduler run ) etc.
