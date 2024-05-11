@@ -15,3 +15,11 @@ Before task is switched out , following things have to be taken care.
 
 ![Screenshot from 2024-05-11 15-22-30](https://github.com/PranabNandy/FreeRTOS/assets/34576104/5bcf4e61-de1c-4579-97c0-3de7c18cfa06)
 
+## Unstacking Part 
+So, at this time, we already know which task(TCB) should be switched in.That means new switchable task’s TCB can be accessed by pxCurrentTCB
+1. First get the address of top of the stack. Copy the value of pxTopOfStack in to PSP register
+2. Pop all the registers (R4-R11, R14) (Restoring the context )
+3. Exception exit: Now PSP is pointing to the start address of the stack frame which will be popped out automatically due to exception exit.
+
+![Screenshot from 2024-05-11 16-48-02](https://github.com/PranabNandy/FreeRTOS/assets/34576104/95d036f0-05a8-4399-8462-81a0d84f4772)
+
