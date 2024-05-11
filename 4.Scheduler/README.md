@@ -50,11 +50,34 @@
 ![Screenshot from 2024-05-11 10-42-21](https://github.com/PranabNandy/FreeRTOS/assets/34576104/907eeeaa-0b12-4f33-883c-53fc853c380e)
 
 ### vTaskStartScheduler()
-- This is implemented in tasks.c of FreeRTOS kernel and used to start the RTOS scheduler.
+- This is implemented in `tasks.c` of FreeRTOS kernel and used to start the RTOS scheduler.
 - Remember that after calling this function only the scheduler code is initialized and all the Arch. Specific interrupts will be activated.
 - This function also creates the idle and Timer daemon task
-- This function calls xPortStartScheduler() to do the Arch. Specific Initializations
+- This function calls `xPortStartScheduler()` to do the Arch. Specific Initializations
 ![Screenshot from 2024-05-11 11-31-12](https://github.com/PranabNandy/FreeRTOS/assets/34576104/121233c6-8ca9-4deb-ba58-73630d65f3e6)
 
 ![Screenshot from 2024-05-11 11-36-32](https://github.com/PranabNandy/FreeRTOS/assets/34576104/5a2e6960-25af-49b1-a674-269a314d055f)
 
+### FreeRTOS Kernel interrupts
+When FreeRTOS runs on ARM Cortex Mx Processor based MCU, below interrupts are used to implement the Scheduling of Tasks.
+1. SVC Interrupt ( SVC handler will be used to launch the very first Task )
+2. PendSV Interrupt (PendSV handler is used to carry out context switching between tasks )
+3. SysTick Interrupt ( SysTick Handler implements the RTOS Tick Management)
+   
+If SysTick interrupt is used for some other purpose in your application, then you may use any other available timer peripheral
+All interrupts are configured at the lowest interrupt priority possible.
+
+### The RTOS Tick- Why it is needed ?
+- The simple answer is to keep track of time elapsed
+- There is a global variable called **xTickCount**, and it is incremented by one whenever tick interrupt occurs
+- RTOS Ticking is implemented using `SysTick timer` of the `ARM Cortex Mx` processor.
+- Tick interrupt happens at the rate of **configTICK_RATE_HZ** configured in the `FreeRTOSConfig.h`
+  
+![Screenshot from 2024-05-11 12-02-01](https://github.com/PranabNandy/FreeRTOS/assets/34576104/f1766813-b0d9-40ea-bcd8-50fc56f628be)
+
+![Screenshot from 2024-05-11 12-48-26](https://github.com/PranabNandy/FreeRTOS/assets/34576104/c6ae3057-d965-4666-9529-9a8fc879db34)
+
+![Screenshot from 2024-05-11 12-51-39](https://github.com/PranabNandy/FreeRTOS/assets/34576104/9f54f1a8-2b20-4361-ae9b-645cf5e78839)
+
+## Context Switching
+  
