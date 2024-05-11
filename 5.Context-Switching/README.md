@@ -3,6 +3,10 @@
 - SysTick timer is used for Kernel ticking, it can not be used for other purposes
 - But other timer peripheral can be used for kernel tick timer
 
+#### In FreeRTOS, who triggers the context switching ?
+- SysTick exception handler
+- Not the PendSV exception handler
+- PendSV handler is responsible for conducting the context switching but it not responsible for triggering that 
 # Context Switching
 - On FreeRTOS you can also trigger context switch manually using **taskYIELD()** macro
 - Kernel mode comes when we execute the SysTick Timer (and its Interrupt Handler), PendSV Code (i.e when Scheduler run ) etc.
