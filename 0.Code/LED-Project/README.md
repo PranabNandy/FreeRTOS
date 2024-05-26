@@ -13,3 +13,7 @@
 ![Screenshot from 2024-05-26 14-48-05](https://github.com/PranabNandy/FreeRTOS/assets/34576104/22e5a8ad-2344-454b-a60e-b06ee5bee686)
 ![Screenshot from 2024-05-26 14-48-24](https://github.com/PranabNandy/FreeRTOS/assets/34576104/285e99d0-f90d-4dd5-b176-209af43aa1ec)
 ![Screenshot from 2024-05-26 14-48-42](https://github.com/PranabNandy/FreeRTOS/assets/34576104/f07a2994-4abf-4d0b-9eb7-32a1f181f29b)
+
+
+## `FreeRTOSConfig.h` should not be common
+- put it inside the `LED-Toggling/Core/inc/` folder
