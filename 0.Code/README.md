@@ -15,3 +15,4 @@
 
 ## vTaskDelay() achieve this
 ![Screenshot from 2024-05-26 21-51-00](https://github.com/PranabNandy/FreeRTOS/assets/34576104/982cc4c5-94a1-4cd4-8701-05079de0ffac)
+![Screenshot from 2024-05-26 21-54-20](https://github.com/PranabNandy/FreeRTOS/assets/34576104/69f036c9-3053-40f6-ae0b-9e6cbf20fa27)
