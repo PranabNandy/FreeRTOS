@@ -11,3 +11,7 @@
 ![Screenshot from 2024-05-09 23-10-40](https://github.com/PranabNandy/FreeRTOS/assets/34576104/a77eb1a9-1148-4042-afe1-325543a1adc2)
 
 ![Screenshot from 2024-05-09 23-12-45](https://github.com/PranabNandy/FreeRTOS/assets/34576104/4d2de942-f1ae-414d-a311-a87f4506ecdf)
+
+
+## vTaskDelay() achieve this
+![Screenshot from 2024-05-26 21-51-00](https://github.com/PranabNandy/FreeRTOS/assets/34576104/982cc4c5-94a1-4cd4-8701-05079de0ffac)
