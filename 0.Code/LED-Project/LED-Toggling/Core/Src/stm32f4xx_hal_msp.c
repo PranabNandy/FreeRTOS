@@ -76,6 +76,7 @@ void HAL_MspInit(void)
 
   /* USER CODE BEGIN MspInit 1 */
 
+ // This one is for delay function
   vInitPrioGroupValue();
 
   /* USER CODE END MspInit 1 */
