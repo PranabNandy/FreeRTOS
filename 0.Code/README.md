@@ -16,3 +16,8 @@
 ## vTaskDelay() achieve this
 ![Screenshot from 2024-05-26 21-51-00](https://github.com/PranabNandy/FreeRTOS/assets/34576104/982cc4c5-94a1-4cd4-8701-05079de0ffac)
 ![Screenshot from 2024-05-26 21-54-20](https://github.com/PranabNandy/FreeRTOS/assets/34576104/69f036c9-3053-40f6-ae0b-9e6cbf20fa27)
+
+## vTaskNotifyWait() vs vTaskNotify()
+![Screenshot from 2024-06-01 10-29-03](https://github.com/PranabNandy/FreeRTOS/assets/34576104/0171afc7-03e2-4aad-8b3f-9256fbe2b6b4)
+![Screenshot from 2024-06-01 10-26-09](https://github.com/PranabNandy/FreeRTOS/assets/34576104/037da1e7-2259-4aca-85be-b622100fd30a)
+
