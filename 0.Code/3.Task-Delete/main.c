@@ -23,7 +23,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
+
+
 #include "FreeRTOS.h"
 #include "task.h"
 
@@ -56,17 +57,25 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 
-static void task1_handler(void* parameters);
-static void task2_handler(void* parameters);
+static void led_green_handler(void* parameters);
+static void led_orange_handler(void* parameters);
+static void led_red_handler(void* parameters);
+static void button_handler(void* parameters);
+
+extern void SEGGER_UART_init(uint32_t);
 
 
-extern  void SEGGER_UART_init(uint32_t);
+TaskHandle_t ledg_task_handle;
+TaskHandle_t ledo_task_handle;
+TaskHandle_t ledr_task_handle;
+TaskHandle_t btn_task_handle;
+
+TaskHandle_t volatile next_task_handle = NULL;
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
 
 /* USER CODE END 0 */
 
@@ -78,9 +87,6 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-	TaskHandle_t task1_handle;
-	TaskHandle_t task2_handle;
-
 	BaseType_t status;
 
   /* USER CODE END 1 */
@@ -89,7 +95,8 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+
+	HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -106,30 +113,35 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
-
-  //Enable the CYCCNT counter.
-  DWT_CTRL |= ( 1 << 0);
-
   SEGGER_UART_init(500000);
+
+  //CYCLCNT enable
+  DWT_CTRL |= ( 1 << 0);
 
   SEGGER_SYSVIEW_Conf();
 
- // SEGGER_SYSVIEW_Start();
-
-  status = xTaskCreate(task1_handler, "Task-1", 200, "Hello world from Task-1", 2, &task1_handle);
+  status = xTaskCreate(led_green_handler, "LED_green_task", 200, NULL, 3, &ledg_task_handle);
 
   configASSERT(status == pdPASS);
 
-  status = xTaskCreate(task2_handler, "Task-2", 200, "Hello world from Task-2", 2, &task2_handle);
+  next_task_handle = ledg_task_handle;
+
+  status = xTaskCreate(led_orange_handler, "LED_orange_task", 200, NULL, 2, &ledo_task_handle);
+
+   configASSERT(status == pdPASS);
+
+  status = xTaskCreate(led_red_handler, "LED_red_task", 200,NULL, 1, &ledr_task_handle);
 
   configASSERT(status == pdPASS);
+
+  status = xTaskCreate(button_handler, "Button Task", 200, NULL, 4, &btn_task_handle);
+
+  configASSERT(status == pdPASS);
+
+
 
   //start the freeRTOS scheduler
   vTaskStartScheduler();
-
-  //if the control comes here, then the launch of the scheduler has failed due to
-  //insufficient memory in heap
-
 
   /* USER CODE END 2 */
  
@@ -240,7 +252,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
@@ -329,33 +341,94 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-static void task1_handler(void* parameters)
-{
 
-	char msg[100];
+static void led_green_handler(void* parameters)
+{
+	BaseType_t  status;
+	while(1)
+	{
+		SEGGER_SYSVIEW_PrintfTarget("Toggling green LED");
+		HAL_GPIO_TogglePin(GPIOD, LED_GREEN_PIN);
+		status = xTaskNotifyWait(0,0,NULL,pdMS_TO_TICKS(1000));
+		if(status == pdTRUE){
+			vTaskSuspendAll();
+			next_task_handle = ledo_task_handle;
+			xTaskResumeAll();
+			HAL_GPIO_WritePin(GPIOD, LED_GREEN_PIN,GPIO_PIN_SET);
+			SEGGER_SYSVIEW_PrintfTarget("Delete green LED task");
+			vTaskDelete(NULL);
+		}
+
+	}
+}
+
+
+static void led_orange_handler(void* parameters)
+{
+	BaseType_t  status;
 
 	while(1)
 	{
-		snprintf(msg,100,"%s\n", (char*)parameters);
-		SEGGER_SYSVIEW_PrintfTarget(msg);
-		taskYIELD();
+		SEGGER_SYSVIEW_PrintfTarget("Toggling orange LED");
+		HAL_GPIO_TogglePin(GPIOD, LED_ORANGE_PIN );
+		status = xTaskNotifyWait(0,0,NULL,pdMS_TO_TICKS(800));
+		if(status == pdTRUE){
+			vTaskSuspendAll();
+			next_task_handle = ledr_task_handle;
+			xTaskResumeAll();
+			HAL_GPIO_WritePin(GPIOD, LED_ORANGE_PIN,GPIO_PIN_SET);
+			SEGGER_SYSVIEW_PrintfTarget("Delete orange LED task");
+			vTaskDelete(NULL);
+		}
+
+	}
+}
+
+
+static void led_red_handler(void* parameters)
+{
+	BaseType_t  status;
+
+	while(1)
+	{
+		SEGGER_SYSVIEW_PrintfTarget("Toggling red LED");
+		HAL_GPIO_TogglePin(GPIOD, LED_RED_PIN);
+		status = xTaskNotifyWait(0,0,NULL,pdMS_TO_TICKS(400));
+		if(status == pdTRUE){
+			vTaskSuspendAll();
+			next_task_handle = NULL;
+			xTaskResumeAll();
+			HAL_GPIO_WritePin(GPIOD, LED_RED_PIN,GPIO_PIN_SET);
+			SEGGER_SYSVIEW_PrintfTarget("Delete red LED task");
+			vTaskDelete(btn_task_handle);
+			vTaskDelete(NULL);
+		}
+
 	}
 
 }
 
 
-static void task2_handler(void* parameters)
+static void button_handler(void* parameters)
 {
-	char msg[100];
-	while(1)
-	{
-		snprintf(msg,100,"%s\n", (char*)parameters);
-		SEGGER_SYSVIEW_PrintfTarget(msg);
-		taskYIELD();
+	uint8_t btn_read = 0;
+	uint8_t prev_read = 0;
+
+	while(1){
+
+		btn_read = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+
+		if(btn_read)
+		{
+			if(! prev_read)
+				xTaskNotify(next_task_handle,0,eNoAction);
+		}
+		prev_read = btn_read;
+		vTaskDelay(pdMS_TO_TICKS(10));
+
 	}
 
 }
-
 /* USER CODE END 4 */
 
 /**
