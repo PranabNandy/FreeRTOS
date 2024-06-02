@@ -10,3 +10,7 @@
 ## Problem
 
 ![Screenshot from 2024-06-02 12-07-52](https://github.com/PranabNandy/FreeRTOS/assets/34576104/b7fd6c1c-f0b4-4ab4-8484-e506658f00fe)
+
+# solution
+### vSuspend all
+### xResume all
