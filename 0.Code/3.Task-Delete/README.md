@@ -1,3 +1,6 @@
+- Task deletion in each button pressed
+- 3 times button pressed will delete the 3 tasks respectively
+
 ## Button GPIO pin number
 
 ![Screenshot from 2024-06-02 10-39-53](https://github.com/PranabNandy/FreeRTOS/assets/34576104/e4310a11-38e7-4218-83af-05b20f7173d6)
