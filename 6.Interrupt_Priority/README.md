@@ -26,5 +26,5 @@
 - 0x00 means Higher Priority
 - 0xF0 means lower Priority
 - MAX_SYSCALL_INTERRUPT_PRIORITY = 0x50
-- The interrupt between (0x0 to 0x40) has higher priorty i.e **can not use** FreeRTOS APIs
-- The interrupt between (0x60 to 0xF0) has lower priorty i.e **can use** FreeRTOS APIs
+- The interrupt between (0x0 to 0x40) has `higher priorty interrupt` i.e **can not use** FreeRTOS APIs
+- The interrupt between (0x60 to 0xF0) has `lower priorty interrupt` i.e **can use** FreeRTOS APIs
