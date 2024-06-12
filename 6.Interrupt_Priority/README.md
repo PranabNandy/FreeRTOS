@@ -15,3 +15,9 @@
 - It defines the number of priorities in the system
   
 ![Screenshot from 2024-06-12 00-13-46](https://github.com/PranabNandy/FreeRTOS/assets/34576104/8ec5ed8f-111e-42f5-961a-acab6e50f5ad)
+
+
+## Kernel Interrupt Priority vs Sys Call Interrupt Priority
+![Screenshot from 2024-06-12 17-13-52](https://github.com/PranabNandy/FreeRTOS/assets/34576104/a28cb731-46cc-4e27-b840-c652df4c7c15)
+![Screenshot from 2024-06-12 17-15-36](https://github.com/PranabNandy/FreeRTOS/assets/34576104/3e055e5f-b5c7-4778-a03c-5cfc9bdaa1e5)
+![Screenshot from 2024-06-12 17-18-27](https://github.com/PranabNandy/FreeRTOS/assets/34576104/70d21ff1-f3da-4665-aa19-38e869a8d8d5)
