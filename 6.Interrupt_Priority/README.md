@@ -21,3 +21,10 @@
 ![Screenshot from 2024-06-12 17-13-52](https://github.com/PranabNandy/FreeRTOS/assets/34576104/a28cb731-46cc-4e27-b840-c652df4c7c15)
 ![Screenshot from 2024-06-12 17-15-36](https://github.com/PranabNandy/FreeRTOS/assets/34576104/3e055e5f-b5c7-4778-a03c-5cfc9bdaa1e5)
 ![Screenshot from 2024-06-12 17-18-27](https://github.com/PranabNandy/FreeRTOS/assets/34576104/70d21ff1-f3da-4665-aa19-38e869a8d8d5)
+
+# Conclude 
+- 0x00 means Higher Priority
+- 0xF0 means lower Priority
+- MAX_SYSCALL_INTERRUPT_PRIORITY = 0x50
+- The interrupt between (0x0 to 0x40) has higher priorty i.e can use FreeRTOS APIs
+- The interrupt between (0x60 to 0xF0) has lower priorty i.e can not use FreeRTOS APIs
