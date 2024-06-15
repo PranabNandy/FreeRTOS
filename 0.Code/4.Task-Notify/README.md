@@ -1,3 +1,12 @@
+## Hardware Priority vs Thread Execution
+Lets say the Task-1 is executing on the CPU whose Priority is 3 . Now processor hits with an 
+interrupt of the USART Tx  whose priority is 2 , will Task1 be  preempted?
+Lets assume : lower numerical number of priority resembles lesser priority and ARM cortex M processor
+
+- Yes ! Thread mode executions can always be preempted irrespective of their priorities by the hardware interrupts which execute in the handler mode.
+
+In other words, do you think interrupt nesting will happen ? 
+- Yes it happens in RTOS
 
 ![Screenshot from 2024-06-12 22-54-52](https://github.com/PranabNandy/FreeRTOS/assets/34576104/98c6b552-30d1-41d7-b12e-2ac2fbdf0286)
 
