@@ -10,6 +10,8 @@ In other words, do you think interrupt nesting will happen ?
 
 In FreeRTOS whoever unblocks the blocked task should also check whether the unblocked task has got the higher priority than the currently running task. If true, then the task **yield function** has to be called to make sure that, the newly unblocked higher-priority task immediately takes over the CPU.
 
+Does having more priority levels affect RAM usage of the MCU ?
+- Yes ! Let’s say in a MCU there are 8 priority levels from 0 to 7, that means at the worst case 8 interrupts can nest isn’t it ? That means at the worst case 7 stack frames are moved to the stack memory . So, 7 * sizeof(each stack frame) number of bytes will be consumed. So, more nesting means more stack consumption.
 
 ![Screenshot from 2024-06-12 22-54-52](https://github.com/PranabNandy/FreeRTOS/assets/34576104/98c6b552-30d1-41d7-b12e-2ac2fbdf0286)
 
