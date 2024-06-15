@@ -8,6 +8,9 @@ Lets assume : lower numerical number of priority resembles lesser priority and A
 In other words, do you think interrupt nesting will happen ? 
 - Yes it happens in RTOS
 
+In FreeRTOS whoever unblocks the blocked task should also check whether the unblocked task has got the higher priority than the currently running task. If true, then the task **yield function** has to be called to make sure that, the newly unblocked higher-priority task immediately takes over the CPU.
+
+
 ![Screenshot from 2024-06-12 22-54-52](https://github.com/PranabNandy/FreeRTOS/assets/34576104/98c6b552-30d1-41d7-b12e-2ac2fbdf0286)
 
 ## when to use ISR API call ?
