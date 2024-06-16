@@ -1,3 +1,15 @@
+
+## why separate API for Interrupt Handler like FromISR ?
+- Because if we call some API from Task handler and it if is not there then task will be block
+- But we can not block the interrupt for the same
+- that's why
+- Sometimes we need to redesign the code for the **FromISR**
+- 
+![Screenshot from 2024-06-16 18-47-42](https://github.com/PranabNandy/FreeRTOS/assets/34576104/afa81d93-ed3a-48ad-90c3-de858563f17d)
+![Screenshot from 2024-06-16 18-54-40](https://github.com/PranabNandy/FreeRTOS/assets/34576104/cd827931-a27f-437f-aadd-09627f20e09d)
+
+
+
 ## Interrupt Priority
 
 
