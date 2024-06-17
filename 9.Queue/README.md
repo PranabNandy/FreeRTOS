@@ -13,3 +13,9 @@
 
 ### example of 1st API
 ![Screenshot from 2024-06-17 20-23-58](https://github.com/PranabNandy/FreeRTOS/assets/34576104/96ad58a2-2a92-4d8f-9aea-ef41d3d1f6af)
+
+
+
+## Receive data items from the Queue
+![Screenshot from 2024-06-17 20-38-06](https://github.com/PranabNandy/FreeRTOS/assets/34576104/d51baa6b-031a-4499-8f70-8039c4d80a35)
+![Screenshot from 2024-06-17 20-39-24](https://github.com/PranabNandy/FreeRTOS/assets/34576104/fa405324-8e66-4578-9552-51880f2a8ca0)
