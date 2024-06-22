@@ -24,5 +24,9 @@
 ![Screenshot from 2024-06-17 23-29-17](https://github.com/PranabNandy/FreeRTOS/assets/34576104/86af5dfe-da83-4d18-a550-4c3ce7774c32)
 
 
+## Settings that needs to be changed
+![Screenshot from 2024-06-22 14-58-14](https://github.com/PranabNandy/FreeRTOS/assets/34576104/7ada7be7-7ff1-464a-94d7-6336e1816a48)
+![Screenshot from 2024-06-22 17-32-35](https://github.com/PranabNandy/FreeRTOS/assets/34576104/69e834da-fb14-4681-9db0-46d1ec30dfe3)
+
 
 
