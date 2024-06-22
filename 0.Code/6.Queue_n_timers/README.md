@@ -1,6 +1,11 @@
 # Queue
 
+Let's say a queue is full, and task1 of priority 5 was blocked on a queue while it attempted to write on that queue, now let's say task2 of priority 3 removes a data item from that queue. Do you think the moment task 2 removes a data item, it will be preempted by task 1 ?
+- Yes Task2 will be pre-empted from Task1 
 
+Can a task block on queue indefinitely ?
+- yes ... if you use portMAX_DELAY, then task will block indefinitely !
+- 
 ![Screenshot from 2024-06-17 20-41-01](https://github.com/PranabNandy/FreeRTOS/assets/34576104/f4b92673-399b-4857-b70d-f021c7df6de3)
 
 ![Screenshot from 2024-06-17 21-02-50](https://github.com/PranabNandy/FreeRTOS/assets/34576104/64d4c1fe-e609-4f83-b3b7-87fa76faae07)
