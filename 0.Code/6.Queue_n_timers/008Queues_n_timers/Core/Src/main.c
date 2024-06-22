@@ -40,13 +40,25 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+RTC_HandleTypeDef hrtc;
 
+UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
+xTaskHandle handle_cmd_task;
+xTaskHandle handle_menu_task;
+xTaskHandle handle_print_task;
+xTaskHandle handle_led_task;
+xTaskHandle handle_rtc_task;
+
+
+QueueHandle_t q_data;
+QueueHandle_t q_print;
 
 //software timer handles
-
+TimerHandle_t  handle_led_timer[4];
+TimerHandle_t rtc_timer;
 
 volatile uint8_t user_data;
 
@@ -63,7 +75,8 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 
-
+void led_effect_callback(TimerHandle_t xTimer);
+void rtc_report_callback( TimerHandle_t xTimer );
 
 /* USER CODE END PFP */
 
@@ -107,7 +120,45 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
 
+	status = xTaskCreate(menu_task, "menu_task", 250, NULL, 2, &handle_menu_task);
 
+	configASSERT(status == pdPASS);
+
+	status = xTaskCreate(cmd_handler_task, "cmd_task", 250, NULL, 2, &handle_cmd_task);
+
+	configASSERT(status == pdPASS);
+
+	status = xTaskCreate(print_task, "print_task", 250, NULL, 2, &handle_print_task);
+
+	configASSERT(status == pdPASS);
+
+	status = xTaskCreate(led_task, "led_task", 250, NULL, 2, &handle_led_task);
+
+	configASSERT(status == pdPASS);
+
+	status = xTaskCreate(rtc_task, "rtc_task", 250, NULL, 2, &handle_rtc_task);
+
+	configASSERT(status == pdPASS);
+
+	q_data = xQueueCreate (10, sizeof(char));
+
+	configASSERT(q_data != NULL);
+
+	q_print = xQueueCreate (10, sizeof(size_t));
+
+	configASSERT(q_print != NULL);
+
+
+	//Create software timers for LED effects
+	for(int i = 0 ; i < 4 ; i++)
+		handle_led_timer[i] = xTimerCreate("led_timer",pdMS_TO_TICKS(500),pdTRUE, (void*)(i+1),led_effect_callback);
+
+
+	rtc_timer = xTimerCreate ("rtc_report_timer",pdMS_TO_TICKS(1000),pdTRUE,NULL,rtc_report_callback);
+
+	HAL_UART_Receive_IT(&huart2, (uint8_t*)&user_data, 1);
+
+	vTaskStartScheduler();
 
   /* USER CODE END 2 */
 
@@ -381,11 +432,68 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+void rtc_report_callback( TimerHandle_t xTimer )
+{
+	 show_time_date_itm();
+
+}
 
 
+void led_effect_callback(TimerHandle_t xTimer)
+{
+	 int id;
+	 id = ( uint32_t ) pvTimerGetTimerID( xTimer );
+
+	 switch(id)
+	 {
+	 case 1 :
+		 LED_effect1();
+		 break;
+	 case 2:
+		 LED_effect2();
+		 break;
+	 case 3:
+		 LED_effect3();
+		 break;
+	 case 4:
+		 LED_effect4();
+	 }
 
 
+}
 
+
+/* This function called from UART interrupt handler , hence executes in interrupt context */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	uint8_t dummy;
+
+	for(uint32_t i = 0 ; i < 4000 ; i++);
+
+	if(! xQueueIsQueueFullFromISR(q_data))
+	{
+		/*Enqueue data byte */
+		xQueueSendFromISR(q_data , (void*)&user_data , NULL);
+	}else{
+		if(user_data == '\n')
+		{
+			/*Make sure that last data byte of the queue is '\n' */
+			xQueueReceiveFromISR(q_data,(void*)&dummy,NULL);
+			xQueueSendFromISR(q_data ,(void*)&user_data , NULL);
+		}
+	}
+
+	/*Send notification to command handling task if user_data = '\n' */
+	if( user_data == '\n' ){
+		/*send notification to command handling task */
+		xTaskNotifyFromISR (handle_cmd_task,0,eNoAction,NULL);
+	}
+
+	/* Enable UART data byte reception again in IT mode */
+	 HAL_UART_Receive_IT(&huart2, (uint8_t*)&user_data, 1);
+
+
+}
 
 /* USER CODE END 4 */
 
@@ -445,11 +553,191 @@ void assert_failed(uint8_t *file, uint32_t line)
 
 #if 0
 
+void cmd_handler_task(void *param)
+{
+	while(1){
+		/*TODO: Implement notify wait */
+
+		/*TODO:process the user data(command) stored in input data queue */
+	}
+
+}
 
 
 
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
 
 
+	if(/*TODO: check : is queue full ? */)
+	{
+		/*Queue is not full */
+
+		/*TODO: Enqueue data byte */
+
+	}else{
+		/*Queue is full */
+
+		if(/*TODO: check, is user_data '\n'? */)
+		{
+			/*user_data = '\n' */
+
+			/*TODO: make sure that last data byte of the queue is '\n' */
+		}
+	}
+
+
+	/*TODO: send notification to command handling task if user_data = '\n' */
+
+
+	/* TODO: Enable UART data byte reception again in IT mode */
+
+
+}
+
+void process_command(command_t *cmd)
+{
+
+	/*Extract the data bytes from the input data queue and form a command */
+	extract_command(cmd);
+
+	switch(curr_state)
+	{
+		case sMainMenu:
+			/*TODO: Notify menu task with the command */
+			break;
+
+		case sLedEffect:
+			/*TODO: Notify LED task with the command */
+			break;
+
+		case sRtcMenu:
+		case sRtcTimeConfig:
+		case sRtcDateConfig:
+		case sRtcReport:
+			/*TODO: Notify RTC task with the command */
+			break;
+	}
+
+}
+
+void rtc_task(void *param)
+{
+	const char* msg_rtc1 = "========================\n"
+							"|         RTC          |\n"
+							"========================\n";
+
+	const char* msg_rtc2 = "Configure Time            ----> 0\n"
+							"Configure Date            ----> 1\n"
+							"Enable reporting          ----> 2\n"
+							"Exit                      ----> 4\n"
+							"Enter your choice here : ";
+
+
+	const char *msg_rtc_hh = "Enter hour(1-12):";
+	const char *msg_rtc_mm = "Enter minutes(0-59):";
+	const char *msg_rtc_ss = "Enter seconds(0-59):";
+
+	const char *msg_rtc_dd  = "Enter date(1-31):";
+	const char *msg_rtc_mo  ="Enter month(1-12):";
+	const char *msg_rtc_dow  = "Enter day(1-7 sun:1):";
+	const char *msg_rtc_yr  = "Enter year(0-99):";
+
+	const char *msg_conf = "Configuration successful\n";
+	const char *msg_rtc_report = "Enable time&date reporting(y/n)?: ";
+
+
+	uint32_t cmd_addr;
+	command_t *cmd;
+
+
+	while(1){
+		/*TODO: Notify wait (wait till someone notifies)
+
+		/*TODO : Print the menu and show current date and time information */
+
+
+		while(curr_state != sMainMenu){
+
+			/*TODO: Wait for command notification (Notify wait) */
+
+			switch(curr_state)
+			{
+				case sRtcMenu:{
+
+					/*TODO: process RTC menu commands */
+					break;}
+
+				case sRtcTimeConfig:{
+					/*TODO : get hh, mm, ss infor and configure RTC */
+
+					/*TODO: take care of invalid entries */
+					break;}
+
+				case sRtcDateConfig:{
+
+					/*TODO : get date, month, day , year info and configure RTC */
+
+					/*TODO: take care of invalid entries */
+
+					break;}
+
+				case sRtcReport:{
+					/*TODO: enable or disable RTC current time reporting over ITM printf */
+					break;}
+
+			}// switch end
+
+		} //while end
+
+		   /*TODO : Notify menu task */
+
+
+		}//while super loop end
+}
+
+void led_task(void *param)
+{
+	uint32_t cmd_addr;
+	command_t *cmd;
+	const char* msg_led = "========================\n"
+						  "|      LED Effect     |\n"
+						  "========================\n"
+						  "(none,e1,e2,e3,e4)\n"
+						  "Enter your choice here : ";
+
+	while(1){
+		/*TODO: Wait for notification (Notify wait) */
+
+		/*TODO: Print LED menu */
+
+		/*TODO: wait for LED command (Notify wait) */
+
+		if(cmd->len <= 4)
+		{
+			if(! strcmp((char*)cmd->payload,"none"))
+				led_effect_stop();
+			else if (! strcmp((char*)cmd->payload,"e1"))
+				led_effect(1);
+			else if (! strcmp((char*)cmd->payload,"e2"))
+				led_effect(2);
+			else if (! strcmp((char*)cmd->payload,"e3"))
+				led_effect(3);
+			else if (! strcmp((char*)cmd->payload,"e4"))
+				led_effect(4);
+			else
+				/*TODO: print invalid message */
+		}else
+			/*TODO: print invalid message */
+
+		/*TODO : update state variable */
+		curr_state = sMainMenu;
+
+		/*TODO : Notify menu task */
+		xTaskNotify(handle_menu_task,0,eNoAction);
+
+	}
+}
 
 #endif
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
