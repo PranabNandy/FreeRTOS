@@ -41,4 +41,5 @@
 ## Implementation Details
 ![Screenshot from 2024-06-22 18-37-05](https://github.com/PranabNandy/FreeRTOS/assets/34576104/6c3f7181-e596-4b9a-9de4-e6a7398848d4)
 
-
+# Hardware Timer vs Software Timer 
+![Screenshot from 2024-06-22 19-30-08](https://github.com/PranabNandy/FreeRTOS/assets/34576104/57204c04-642c-4fd0-9772-6944e4d896af)
